@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <div>
+        <h3>Max odd :  <input type="number" id="maxOdd" name="maxOdd" value></h3>
+    
+        <h3>Min odd :  <input type="number" id="minOdd" name="minOdd" value></h3>
+        <h3>Investment :  <input type="number" id="betAmount" name="betAmount" value></h3>
+    </div>
+    <br/>
+    <div>
+        <h2>Arbitage exists : <span id="arbritage">NO</span></h2>
+        <h2>Arbitage Percentage : <span id="arbritagePercentage">%</span></h2>
+    </div>
+    <br/>
+    <div>
+        <div>
+            <h2 style="color: rgb(88, 150, 88)">Max Odd Stake : <span id="maxOddStake"></span></h2>
+        </div>
+        <div>
+            <h2 style="color: rgb(190, 104, 104)">Min Odd Stake : <span id="minOddStake"></span></h2>
+        </div>
+    </div>
+    <br/>
+    <div>
+        <div>
+            <h2>Total Return : <span id="totalReturn"></span></h2>
+        </div>
+        <div>
+            <h2>PROFIT : <span id="profit"></span></h2>
+        </div>
+        <div>
+            <h2>PROFIT % : <span id="profitPercentage"></span></h2>
+        </div>
+    </div>
+    <script>
+        //common variables
+    let maxOddValue;
+    let minOddValue;
+    let maxOddPercentage;
+    let minOddPercentage;
+    let isArbritage;
+    let sum;
+    let x;
+    let profitAmount;
+    let profitPercentage;
+    let totalReturn;
+    let maxOddStake;
+    let minOddStake;
+    let colorStake;
+
+        //max func
+    document.getElementsByName("maxOdd")[0].addEventListener('change', doMaxFunc);
+    function doMaxFunc(){
+        maxOddValue = parseFloat(this.value);
+        maxOddPercentage = (1/maxOddValue)*100;
+        sum = maxOddPercentage + minOddPercentage;
+        isArbritage = (sum < 100) ? 'YES' : 'NO';
+        const color = (sum < 100) ? 'green' : 'red';
+        document.querySelector("#arbritage").innerHTML = isArbritage;
+        document.querySelector("#arbritage").style.color = color;
+        document.querySelector("#arbritagePercentage").innerHTML = (sum).toFixed(2) + '%';
+        document.querySelector("#arbritagePercentage").style.color = color;
+
+        profitAmount = ((x / sum * 100) - x);
+        profitPercentage = ((profitAmount / x *100).toFixed(1)) + '%';
+        totalReturn = (profitAmount + x);
+        maxOddStake = (totalReturn / maxOddValue);
+        minOddStake = (totalReturn / minOddValue);
+        colorStake = (totalReturn > x) ? 'green' : 'red';
+        document.querySelector("#maxOddStake").innerHTML = (maxOddStake).toFixed(0) + ' /-';
+        document.querySelector("#maxOddStake").style.color = 'orange';
+        document.querySelector("#minOddStake").innerHTML = (minOddStake).toFixed(0) + ' /-';
+        document.querySelector("#minOddStake").style.color = 'orange';
+        document.querySelector("#totalReturn").innerHTML = (totalReturn).toFixed(1) + ' /-';
+        document.querySelector("#profit").innerHTML = (profitAmount).toFixed(1) + ' /-';
+        document.querySelector("#profit").style.color = colorStake;
+        document.querySelector("#profitPercentage").innerHTML = (profitPercentage);
+        document.querySelector("#profitPercentage").style.color = colorStake;
+    } 
+    //min func
+    document.getElementsByName("minOdd")[0].addEventListener('change', doMinFunc);
+    function doMinFunc(){
+        minOddValue = parseFloat(this.value);
+        minOddPercentage = (1/minOddValue)*100;
+        sum = maxOddPercentage + minOddPercentage;
+        isArbritage = (sum < 100) ? 'YES' : 'NO';
+        const color = (sum < 100) ? 'green' : 'red';
+        document.querySelector("#arbritage").innerHTML = isArbritage;
+        document.querySelector("#arbritage").style.color = color;
+        document.querySelector("#arbritagePercentage").innerHTML = (sum).toFixed(2) + '%';
+        document.querySelector("#arbritagePercentage").style.color = color;
+
+        profitAmount = ((x / sum * 100) - x);
+        profitPercentage = ((profitAmount / x *100).toFixed(1)) + '%';
+        totalReturn = (profitAmount + x);
+        maxOddStake = (totalReturn / maxOddValue);
+        minOddStake = (totalReturn / minOddValue);
+        colorStake = (totalReturn > x) ? 'green' : 'red';
+        document.querySelector("#maxOddStake").innerHTML = (maxOddStake).toFixed(0) + ' /-';
+        document.querySelector("#maxOddStake").style.color = 'orange';
+        document.querySelector("#minOddStake").innerHTML = (minOddStake).toFixed(0) + ' /-';
+        document.querySelector("#minOddStake").style.color = 'orange';
+        document.querySelector("#totalReturn").innerHTML = (totalReturn).toFixed(1) + ' /-';
+        document.querySelector("#profit").innerHTML = (profitAmount).toFixed(1) + ' /-';
+        document.querySelector("#profit").style.color = colorStake;
+        document.querySelector("#profitPercentage").innerHTML = (profitPercentage);
+        document.querySelector("#profitPercentage").style.color = colorStake;
+    }
+   
+    //Stake calculation
+
+    document.getElementsByName("betAmount")[0].addEventListener('change', stakeFunc);
+    function stakeFunc(){
+        x = parseFloat(this.value);
+        profitAmount = ((x / sum * 100) - x);
+        profitPercentage = ((profitAmount / x *100).toFixed(1)) + '%';
+        totalReturn = (profitAmount + x);
+        maxOddStake = (totalReturn / maxOddValue);
+        minOddStake = (totalReturn / minOddValue);
+        colorStake = (totalReturn > x) ? 'green' : 'red';
+        document.querySelector("#maxOddStake").innerHTML = (maxOddStake).toFixed(0) + ' /-';
+        document.querySelector("#maxOddStake").style.color = 'orange';
+        document.querySelector("#minOddStake").innerHTML = (minOddStake).toFixed(0) + ' /-';
+        document.querySelector("#minOddStake").style.color = 'orange';
+        document.querySelector("#totalReturn").innerHTML = (totalReturn).toFixed(1) + ' /-';
+        document.querySelector("#profit").innerHTML = (profitAmount).toFixed(1) + ' /-';
+        document.querySelector("#profit").style.color = colorStake;
+        document.querySelector("#profitPercentage").innerHTML = (profitPercentage);
+        document.querySelector("#profitPercentage").style.color = colorStake;
+     }
+    </script>
+    </body>
+</html>
